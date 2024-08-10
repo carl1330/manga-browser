@@ -1,0 +1,18 @@
+package settings
+
+import "github.com/carl1330/manga-browser/view/layout"
+import "github.com/carl1330/manga-browser/view/common"
+
+templ Show() {
+  @layout.Base() {
+    @SettingsNavbar()
+  }
+}
+
+templ SettingsNavbar() {
+  <nav class="w-screen flex gap-4 p-4 justify-end bg-slate-900">
+    @common.Button() {
+      <i data-lucide="accessibility" />
+    } 
+  </nav>
+}

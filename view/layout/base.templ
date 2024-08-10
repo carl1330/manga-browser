@@ -1,0 +1,55 @@
+package layout
+
+templ Base() {
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Mokuro Browser</title>
+      <script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="/static/css/output.css">
+  </head>
+  <body>
+      { children... }
+      <script src="https://unpkg.com/lucide@latest"></script>
+        <script>
+          lucide.createIcons();
+        </script>
+  </body>
+  </html>
+}
+
+templ Navbar() {
+  <script>
+    async function handleUploadManga() {
+      const pickerOpts = {
+        types: [
+          {
+            description: "Compressed manga folder",
+            accept: {
+              "application/zip": [".zip"],
+              "application/vnd.rar": [".rar"]
+            },
+          },
+        ],
+        excludeAcceptAllOption: true,
+      };
+      console.log(await window.showOpenFilePicker(pickerOpts))
+    }
+  </script>
+
+  <nav class="w-screen flex gap-4 p-4 justify-end bg-slate-900">
+    <button class="text-slate-400 hover:text-orange-700" onclick="handleUploadManga()">
+      <i data-lucide="folder-up" />
+    </button>
+    <button class="text-slate-400 hover:text-orange-700">
+      <i data-lucide="cloud" />
+    </button>
+    <button class="text-slate-400 hover:text-orange-700">
+      <a href="settings">
+        <i data-lucide="settings" />
+      </a>
+    </button>
+  </nav>
+}
