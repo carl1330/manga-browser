@@ -35,7 +35,32 @@ templ Navbar() {
         ],
         excludeAcceptAllOption: true,
       };
-      console.log(await window.showOpenFilePicker(pickerOpts))
+      try {
+        const fileHandles = await window.showOpenFilePicker(pickerOpts)
+        if (fileHandles.length > 0) {
+          const fileHandle = fileHandles[0];
+          const file = await fileHandle.getFile();
+          console.log('Selected file:', file.name);
+          
+          // Create a FormData object and append the file
+          const formData = new FormData();
+          formData.append('file', file);
+
+          // Send the file to the backend
+          const response = await fetch('/api/manga', {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.ok) {
+            console.log('File uploaded successfully');
+          } else {
+            console.error('File upload failed');
+          }
+        }
+      } catch (error) {
+        console.error('Error selecting or uploading file:', error);
+      }
     }
   </script>
 

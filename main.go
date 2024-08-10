@@ -11,9 +11,11 @@ func main() {
 
 	homeHandler := handlers.Home{}
 	settingsHandler := handlers.Settings{}
+	mangaHandler := handlers.Manga{}
 	app.Static("/static", "assets")
 	app.GET("/", homeHandler.HandleHome)
 	app.GET("/settings", settingsHandler.HandleSettings)
+	app.POST("/api/manga", mangaHandler.PostManga)
 
 	app.Start(":3000")
 }
